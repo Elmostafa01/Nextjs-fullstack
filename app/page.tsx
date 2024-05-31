@@ -7,7 +7,7 @@ export default function Home() {
     <main className="max-w-2xl mx-auto p-16">
       <div className="flex justify-center flex-col gap-2">
         <Input placeholder="input component"/>
-        <Button >Submit</Button>
+        <Button variant="destructive" >Submit</Button>
       </div>
       <div className="p-5">
         <ul className="flex flex-col gap-1">
