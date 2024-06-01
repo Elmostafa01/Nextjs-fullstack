@@ -1,19 +1,29 @@
+import { getMessagesFromDatabase } from "@/actions/get-messages-from-database";
+import { Trash } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import Image from "next/image";
+import MessageForm from "@/components/ui/messageform";
 
-export default function Home() {
+export default async function Home() {
+
+  const messages = await getMessagesFromDatabase();
+
+
+
   return (
     <main className="max-w-2xl mx-auto p-16">
-      <div className="flex justify-center flex-col gap-2">
-        <Input placeholder="input component"/>
-        <Button variant="destructive" >Submit</Button>
-      </div>
       <div className="p-5">
-        <ul className="flex flex-col gap-1">
-          {[Array.from({length: 3}).map((_, i) => (
-            <li className="bg-slate-100 p-2 rounded" key={i}>this is a test {i + 1}</li>
-          ))]}
+        <MessageForm />
+        <ul className="flex flex-col gap-1 mt-6">
+          {messages.map((message) => {
+           return <li className="bg-slate-100 p-2 rounded flex items-center justify-between" key={message.id}>
+              <p className="pl-4">
+                {message.message}
+              </p> 
+              <Button>
+                <Trash  />
+              </Button>
+            </li>
+          })}
         </ul>
       </div>
     </main>
